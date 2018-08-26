@@ -10,6 +10,15 @@
     <link rel="stylesheet" href="styles/layout.css">
     <link rel="stylesheet" href="styles/modules.css">
     <link rel="icon" type="image/x-icon" href="https://avatars2.githubusercontent.com/u/18607604?v=3&s=200">
+
+    <!--TODO:ASSIGNMENT: Set up a template for each row of author stats section -->
+    <!-- HEATHER COMMENT: This seems very wrong because it's not making any sense -->
+    <script id="author-stats" type="text/x-handlebars-template">
+      <h2>{{author-stats}}</h2>
+      <p><em>Details on who is writing, and how much writing they are doing...</em></p>
+      <ul class="author-stats"></ul>
+      </script>
+
   </head>
   <body>
     <header class="clearfix">
@@ -33,10 +42,10 @@
       <section id="blog-stats">
         <dt>Total articles:</dt> <dd class="articles"></dd>
         <dt>Total words:</dt> <dd class="words"></dd>
-        <h2>Author Stats</h2>
+        <!-- <h2>Author Stats</h2>
         <p><em>Details on who is writing, and how much writing they are doing...</em></p>
         <ul class="author-stats">
-        </ul>
+        </ul> -->
       </section>
     </main>
     <footer>
@@ -45,10 +54,21 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
-    <script src="scripts/article.js"></script>
-    <script src="scripts/articleView.js"></script>
+
+  <!-- RESOURCE: https://developer.mozilla.org/en-US/docs/web/javascript/reference/statements/export -->
+    <script type="module" src="scripts/article.js"></script>
+    <!-- <script src="scripts/article.js"></script> -->
+    <script type="module" src="scripts/articleView.js"></script>
+    <!-- <script src="scripts/articleView.js"></script> -->
     <script>
-      Article.fetchAll();
+      /*TODO: ASSIGNMENT: index.html & admin.html need to call Article.fetchAll() in a way that properly triggers the appropriate page set up methods*/
+
+      /* HEATHER COMMENT:
+      I have tried app.Article.fetchAll(articleView.initAdminPage); / app.Article.fetchAll(app.articleView.initAdminPage); /module.Article.fetchAll(articleView.initAdminPage); ---- all not defined*/
+      Article.fetchAll(articleView.initAdminPage);
+    </script>
+    <script>
+    /*TODO: ASSIGNMENT: index.html & admin.html need access to Article.all data (different view functions for each page)*/
     </script>
   </body>
 </html>

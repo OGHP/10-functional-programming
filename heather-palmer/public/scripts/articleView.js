@@ -2,6 +2,10 @@
 var app = app || {};
 
 var articleView = {};
+
+/*TODO: wrap script in IIFE with parameter called 'module' & pass in new app object as an argument*/
+
+/*HEATHER COMMENT: Does this mean to wrap all functions into 1 IIFE so they will execute on page load or wrap each function into its own IIFE so it will execute?*/
 (function (module) {
   articleView.populateFilters = () => {
     $('article').each(function() {
@@ -135,8 +139,19 @@ var articleView = {};
     // REVIEW: We use .forEach() here because we are relying on the side-effects of the callback function: appending to the DOM. The callback is not required to return anything.
     app.Article.numWordsByAuthor().forEach(stat => $('.author-stats').append(template(stat)));
 
+    /*TODO: ASSIGNMENT: call handlebars .compile() when initializing. Assign results to same variable name that's used when author stats are appended to the DOM.*/
+
+    /*HEATHER COMMENT: I don't know how to call handlebars .compile() but the variable name would be author-stats (as used in the function above)*/
+
     // REVIEW: Simply write the correct values to the page:
     $('#blog-stats .articles').text(app.Article.all.length);
     $('#blog-stats .words').text(app.Article.numWordsAll());
   };
 })(app);
+
+//TODO: ASSIGNMENT: export articleView object
+
+// HEATHER COMMENT: (from MDN) The export statement is used when creating JavaScript modules to export functions, objects, or primitive values from the module so they can be used by other programs with the import statement. How??
+export { articleView };
+
+

@@ -1,13 +1,16 @@
 'use strict';
 var app = app || {};
 
+/*TODO: wrap script in IIFE with parameter called 'module' & pass in new app object as an argument*/
+
+/*HEATHER COMMENT: Does this mean to wrap all functions into 1 IIFE so they will execute on page load or wrap each function into its own IIFE so it will execute?*/
 (function(module) {
   function Article(rawDataObj) {
     // REVIEW: In Lab 8, we explored a lot of new functionality going on here. Let's re-examine the concept of context. Normally, "this" inside of a constructor function refers to the newly instantiated object. However, in the function we're passing to forEach, "this" would normally refer to "undefined" in strict mode. As a result, we had to pass a second argument to forEach to make sure our "this" was still referring to our instantiated object. One of the primary purposes of lexical arrow functions, besides cleaning up syntax to use fewer lines of code, is to also preserve context. That means that when you declare a function using lexical arrows, "this" inside the function will still be the same "this" as it was outside the function. As a result, we no longer have to pass in the optional "this" argument to forEach!
+
     //HEATHER COMMENT: 'this' comment above & code below make no sense to me!
     Object.keys(rawDataObj).forEach(key => this[key] = rawDataObj[key]);
   };
-
 
   Article.all = [];
 
@@ -28,6 +31,15 @@ var app = app || {};
     articleData.forEach(articleObject => Article.all.push(new Article(articleObject)));
     */
 
+    /*TODO: ASSIGNMENT: in loadAll, refactor the forEach using .map()
+    set variables equal to thr rest of a function. If var = result of .map() is will become the transformed array. NO NEED TO PUSH ANYTHING*/
+
+    /* HEATHER COMMENT: map calls a provided callback function once for each element in an array, in order, and constructs a new array from the results. What variable is the assignment referring to? I have no idea how to refactor this or what it's even doing*/
+    articleData.map((articleObject) => {
+      Article.all.push(new Article(articleObject)
+      )
+    });
+
   };
 
   Article.fetchAll = callback => {
@@ -38,10 +50,16 @@ var app = app || {};
       })
   };
 
+  /*TODO: ASSIGNMENT:Chain together a .map() and a .reduce() call to get a rough count of all the words in an article (use optional accumulator argument in reduce() call*/
+
+  // HEATHER COMMENT: Is that already happening for me here? If so, I don't know how to use the accumulator argument here
   Article.numWordsAll = () => {
     return Article.all.map().reduce()
   };
 
+    /*TODO: ASSIGNMENT: Chain together a .map() and a .reduce() call to produce an array of unique author names*/
+
+  // HEATHER COMMENT: Is that already happening for me here?
   Article.allAuthors = () => {
     return Article.all.map().reduce();
   };
@@ -95,3 +113,17 @@ var app = app || {};
   };
 })(app);
 
+//TODO: ASSIGNMENT: export Article object
+
+/*HEATHER COMMENT: (from MDN) The export statement is used when creating JavaScript modules to export functions, objects, or primitive values from the module so they can be used by other programs with the import statement. HOW do I implement that here? export Article doesn't work*/
+export { Article };
+
+/*TODO: ASSIGNMENT: Transform each author string into an object w/properties for the authors name and total number of words across all articles written by the specific author.
+
+.map() should be set up to return an object literal with two properties
+
+first property is straight forward
+
+second property will need some combination of .map(), .filter(), and .reduce()() to get the value*/
+
+/*HEATHER COMMENT: I have no idea where to even begin this, I think it would be on the article.js page but I'm not sure*/

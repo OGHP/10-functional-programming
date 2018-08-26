@@ -83,10 +83,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.6/marked.min.js"></script>
     <script src="vendor/scripts/highlight.pack.js"></script>
-    <script src="scripts/article.js"></script>
-    <script src="scripts/articleView.js"></script>
+
+  <!-- RESOURCE: https://developer.mozilla.org/en-US/docs/web/javascript/reference/statements/export -->
+    <script type="module" src="scripts/article.js"></script>
+    <!-- <script src="scripts/article.js"></script> -->
+    <script type="module" src="scripts/articleView.js"></script>
+    <!-- <script src="scripts/articleView.js"></script> -->
     <script>
+      /*TODO: ASSIGNMENT: index.ht,l & admin.html need to call Article.fetchAll() in a way that properly triggers the appropriate page set up methods*/
+
+      /* HEATHER COMMENT: everything I try is undefined*/
       Article.fetchAll(articleView.initIndexPage);
+    </script>
+    <script>
+      /*TODO: ASSIGNMENT: index.html & admin.html need access to Article.all data (different view functions for each page)*/
     </script>
   </body>
 </html>
