@@ -1,13 +1,11 @@
 'use strict';
 var app = app || {};
-
-var articleView = {};
-
-/*TODO: wrap script in IIFE with parameter called 'module' & pass in new app object as an argument*/
-
+/*ASSIGNMENT: wrap script in IIFE with parameter called 'module' & pass in new app object as an argument*/
 /*HEATHER COMMENT: Does this mean to wrap all functions into 1 IIFE so they will execute on page load or wrap each function into its own IIFE so it will execute?*/
-(function (module) {
-  articleView.populateFilters = () => {
+
+(function articleViewFunction(module) {
+  module.articleView = {};
+  module.articleView.populateFilters = () => {
     $('article').each(function() {
       if (!$(this).hasClass('template')) {
         var val = $(this).find('address a').text();
@@ -25,7 +23,7 @@ var articleView = {};
     });
   };
 
-  articleView.handleAuthorFilter = () => {
+  module.articleView.handleAuthorFilter = () => {
     $('#author-filter').on('change', function() {
       if ($(this).val()) {
         $('article').hide();
@@ -38,7 +36,7 @@ var articleView = {};
     });
   };
 
-  articleView.handleCategoryFilter = () => {
+  module.articleView.handleCategoryFilter = () => {
     $('#category-filter').on('change', function() {
       if ($(this).val()) {
         $('article').hide();
@@ -51,7 +49,7 @@ var articleView = {};
     });
   };
 
-  articleView.handleMainNav = () => {
+  module.articleView.handleMainNav = () => {
     $('nav').on('click', '.tab', function(e) {
       e.preventDefault();
       $('.tab-content').hide();
@@ -61,7 +59,7 @@ var articleView = {};
     $('nav .tab:first').click();
   };
 
-  articleView.setTeasers = () => {
+  module.articleView.setTeasers = () => {
     $('.article-body *:nth-of-type(n+2)').hide();
     $('article').on('click', 'a.read-on', function(e) {
       e.preventDefault();
@@ -78,7 +76,7 @@ var articleView = {};
     });
   };
 
-  articleView.initNewArticlePage = () => {
+  module.articleView.initNewArticlePage = () => {
     $('.tab-content').show();
     $('#export-field').hide();
     $('#article-json').on('focus', function(){
@@ -89,11 +87,11 @@ var articleView = {};
     $('#new-form').on('submit', articleView.submit);
   };
 
-  articleView.create = () => {
+  module.articleView.create = () => {
     var article;
     $('#articles').empty();
 
-    article = new Article({
+    article = new module.Article({
       title: $('#article-title').val(),
       author: $('#article-author').val(),
       author_url: $('#article-author-url').val(),
@@ -106,9 +104,9 @@ var articleView = {};
     $('pre code').each((i, block) => hljs.highlightBlock(block));
   };
 
-  articleView.submit = event => {
+  module.articleView.submit = event => {
     event.preventDefault();
-    let article = new Article({
+    let article = new module.Article({
       title: $('#article-title').val(),
       author: $('#article-author').val(),
       author_url: $('#article-author-url').val(),
@@ -123,7 +121,7 @@ var articleView = {};
     window.location = '../';
   }
 
-  articleView.initIndexPage = () => {
+  module.articleView.initIndexPage = () => {
     app.Article.all.forEach(a => $('#articles').append(a.toHtml()));
 
     articleView.populateFilters();
@@ -134,14 +132,12 @@ var articleView = {};
     $('pre code').each((i, block) => hljs.highlightBlock(block));
   };
 
-  articleView.initAdminPage = () => {
+  module.articleView.initAdminPage = () => {
+    /*ASSIGNMENT: call handlebars .compile() when initializing. Assign results to same variable name that's used when author stats are appended to the DOM.*/
+    var template = Handlebars.compile($('#author-template').text());
 
     // REVIEW: We use .forEach() here because we are relying on the side-effects of the callback function: appending to the DOM. The callback is not required to return anything.
     app.Article.numWordsByAuthor().forEach(stat => $('.author-stats').append(template(stat)));
-
-    /*TODO: ASSIGNMENT: call handlebars .compile() when initializing. Assign results to same variable name that's used when author stats are appended to the DOM.*/
-
-    /*HEATHER COMMENT: I don't know how to call handlebars .compile() but the variable name would be author-stats (as used in the function above)*/
 
     // REVIEW: Simply write the correct values to the page:
     $('#blog-stats .articles').text(app.Article.all.length);
@@ -152,6 +148,6 @@ var articleView = {};
 //TODO: ASSIGNMENT: export articleView object
 
 // HEATHER COMMENT: (from MDN) The export statement is used when creating JavaScript modules to export functions, objects, or primitive values from the module so they can be used by other programs with the import statement. How??
-export { articleView };
+// export { articleView };
 
 

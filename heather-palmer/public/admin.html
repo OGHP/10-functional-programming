@@ -11,13 +11,10 @@
     <link rel="stylesheet" href="styles/modules.css">
     <link rel="icon" type="image/x-icon" href="https://avatars2.githubusercontent.com/u/18607604?v=3&s=200">
 
-    <!--TODO:ASSIGNMENT: Set up a template for each row of author stats section -->
-    <!-- HEATHER COMMENT: This seems very wrong because it's not making any sense -->
-    <script id="author-stats" type="text/x-handlebars-template">
-      <h2>{{author-stats}}</h2>
-      <p><em>Details on who is writing, and how much writing they are doing...</em></p>
-      <ul class="author-stats"></ul>
-      </script>
+    <!--ASSIGNMENT: Set up a template for each row of author stats section -->
+    <script id="author-template" type="text/x-handlebars-template">
+      <li>{{author}} has written {{numWords}} words</li>
+    </script>
 
   </head>
   <body>
@@ -60,15 +57,13 @@
     <!-- <script src="scripts/article.js"></script> -->
     <script type="module" src="scripts/articleView.js"></script>
     <!-- <script src="scripts/articleView.js"></script> -->
-    <script>
-      /*TODO: ASSIGNMENT: index.html & admin.html need to call Article.fetchAll() in a way that properly triggers the appropriate page set up methods*/
 
-      /* HEATHER COMMENT:
-      I have tried app.Article.fetchAll(articleView.initAdminPage); / app.Article.fetchAll(app.articleView.initAdminPage); /module.Article.fetchAll(articleView.initAdminPage); ---- all not defined*/
-      Article.fetchAll(articleView.initAdminPage);
-    </script>
+
+    <!-- ASSIGNMENT: index.html & admin.html need to call Article.fetchAll() in a way that properly triggers the appropriate page set up methods -->
     <script>
-    /*TODO: ASSIGNMENT: index.html & admin.html need access to Article.all data (different view functions for each page)*/
+      app.Article.fetchAll(app.articleView.initAdminPage);
     </script>
+    <!-- TODO: ASSIGNMENT: index.html & admin.html need access to Article.all data (different view functions for each page)*/
+    /*HEATHER COMMENT: I'm not sure what this todo is asking - is this the same as line 62? -->
   </body>
 </html>

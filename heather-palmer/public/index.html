@@ -89,14 +89,12 @@
     <!-- <script src="scripts/article.js"></script> -->
     <script type="module" src="scripts/articleView.js"></script>
     <!-- <script src="scripts/articleView.js"></script> -->
-    <script>
-      /*TODO: ASSIGNMENT: index.ht,l & admin.html need to call Article.fetchAll() in a way that properly triggers the appropriate page set up methods*/
 
-      /* HEATHER COMMENT: everything I try is undefined*/
-      Article.fetchAll(articleView.initIndexPage);
-    </script>
+    <!-- ASSIGNMENT: index.ht,l & admin.html need to call Article.fetchAll() in a way that properly triggers the appropriate page set up methods -->
     <script>
-      /*TODO: ASSIGNMENT: index.html & admin.html need access to Article.all data (different view functions for each page)*/
+      app.Article.fetchAll(app.articleView.initIndexPage);
     </script>
+    <!-- TODO: ASSIGNMENT: index.html & admin.html need access to Article.all data (different view functions for each page)*/
+        /*HEATHER COMMENT: I'm not sure what this todo is asking - is this the same as line 93? -->
   </body>
 </html>
