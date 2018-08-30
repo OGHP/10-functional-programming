@@ -1,11 +1,12 @@
 'use strict';
 var app = app || {};
+
 /*ASSIGNMENT: wrap script in IIFE with parameter called 'module' & pass in new app object as an argument*/
 /*HEATHER COMMENT: Does this mean to wrap all functions into 1 IIFE so they will execute on page load or wrap each function into its own IIFE so it will execute?*/
 
-(function articleViewFunction(module) {
-  module.articleView = {};
-  module.articleView.populateFilters = () => {
+(function(module) {
+  let articleView = {};
+  articleView.populateFilters = () => {
     $('article').each(function() {
       if (!$(this).hasClass('template')) {
         var val = $(this).find('address a').text();
@@ -23,7 +24,7 @@ var app = app || {};
     });
   };
 
-  module.articleView.handleAuthorFilter = () => {
+  articleView.handleAuthorFilter = () => {
     $('#author-filter').on('change', function() {
       if ($(this).val()) {
         $('article').hide();
@@ -36,7 +37,7 @@ var app = app || {};
     });
   };
 
-  module.articleView.handleCategoryFilter = () => {
+  articleView.handleCategoryFilter = () => {
     $('#category-filter').on('change', function() {
       if ($(this).val()) {
         $('article').hide();
@@ -49,7 +50,7 @@ var app = app || {};
     });
   };
 
-  module.articleView.handleMainNav = () => {
+  articleView.handleMainNav = () => {
     $('nav').on('click', '.tab', function(e) {
       e.preventDefault();
       $('.tab-content').hide();
@@ -59,7 +60,7 @@ var app = app || {};
     $('nav .tab:first').click();
   };
 
-  module.articleView.setTeasers = () => {
+  articleView.setTeasers = () => {
     $('.article-body *:nth-of-type(n+2)').hide();
     $('article').on('click', 'a.read-on', function(e) {
       e.preventDefault();
@@ -76,7 +77,7 @@ var app = app || {};
     });
   };
 
-  module.articleView.initNewArticlePage = () => {
+  articleView.initNewArticlePage = () => {
     $('.tab-content').show();
     $('#export-field').hide();
     $('#article-json').on('focus', function(){
@@ -87,11 +88,11 @@ var app = app || {};
     $('#new-form').on('submit', articleView.submit);
   };
 
-  module.articleView.create = () => {
+  articleView.create = () => {
     var article;
     $('#articles').empty();
 
-    article = new module.Article({
+    article = new Article({
       title: $('#article-title').val(),
       author: $('#article-author').val(),
       author_url: $('#article-author-url').val(),
@@ -104,9 +105,9 @@ var app = app || {};
     $('pre code').each((i, block) => hljs.highlightBlock(block));
   };
 
-  module.articleView.submit = event => {
+  articleView.submit = event => {
     event.preventDefault();
-    let article = new module.Article({
+    let article = new Article({
       title: $('#article-title').val(),
       author: $('#article-author').val(),
       author_url: $('#article-author-url').val(),
@@ -121,7 +122,7 @@ var app = app || {};
     window.location = '../';
   }
 
-  module.articleView.initIndexPage = () => {
+  articleView.initIndexPage = () => {
     app.Article.all.forEach(a => $('#articles').append(a.toHtml()));
 
     articleView.populateFilters();
@@ -132,7 +133,7 @@ var app = app || {};
     $('pre code').each((i, block) => hljs.highlightBlock(block));
   };
 
-  module.articleView.initAdminPage = () => {
+  articleView.initAdminPage = () => {
     /*ASSIGNMENT: call handlebars .compile() when initializing. Assign results to same variable name that's used when author stats are appended to the DOM.*/
     var template = Handlebars.compile($('#author-template').text());
 
@@ -143,11 +144,5 @@ var app = app || {};
     $('#blog-stats .articles').text(app.Article.all.length);
     $('#blog-stats .words').text(app.Article.numWordsAll());
   };
+  module.articleView = articleView;
 })(app);
-
-//TODO: ASSIGNMENT: export articleView object
-
-// HEATHER COMMENT: (from MDN) The export statement is used when creating JavaScript modules to export functions, objects, or primitive values from the module so they can be used by other programs with the import statement. How??
-// export { articleView };
-
-

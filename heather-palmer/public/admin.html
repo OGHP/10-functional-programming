@@ -39,10 +39,10 @@
       <section id="blog-stats">
         <dt>Total articles:</dt> <dd class="articles"></dd>
         <dt>Total words:</dt> <dd class="words"></dd>
-        <!-- <h2>Author Stats</h2>
+        <h2>Author Stats</h2>
         <p><em>Details on who is writing, and how much writing they are doing...</em></p>
         <ul class="author-stats">
-        </ul> -->
+        </ul>
       </section>
     </main>
     <footer>
@@ -52,18 +52,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
 
-  <!-- RESOURCE: https://developer.mozilla.org/en-US/docs/web/javascript/reference/statements/export -->
-    <script type="module" src="scripts/article.js"></script>
-    <!-- <script src="scripts/article.js"></script> -->
-    <script type="module" src="scripts/articleView.js"></script>
-    <!-- <script src="scripts/articleView.js"></script> -->
+    <script src="scripts/article.js"></script>
+    <script src="scripts/articleView.js"></script>
 
-
-    <!-- ASSIGNMENT: index.html & admin.html need to call Article.fetchAll() in a way that properly triggers the appropriate page set up methods -->
     <script>
       app.Article.fetchAll(app.articleView.initAdminPage);
     </script>
-    <!-- TODO: ASSIGNMENT: index.html & admin.html need access to Article.all data (different view functions for each page)*/
-    /*HEATHER COMMENT: I'm not sure what this todo is asking - is this the same as line 62? -->
   </body>
 </html>
